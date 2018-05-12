@@ -1,15 +1,18 @@
 package com.example.huongthutran.sunmusic.datamodel;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class CategorySong {
     private int category_id;
     private String name;
     private String image;
-    private String[] song_ids;
+    private List<String> song_ids;
 
     public CategorySong(){
-
+        song_ids=new LinkedList<>();
     }
-    public CategorySong( int category_id,String image,String name,String[] song_ids ){
+    public CategorySong( int category_id,String image,String name,List<String> song_ids ){
         this.category_id=category_id;
         this.name=name;
         this.image=image;
@@ -39,11 +42,11 @@ public class CategorySong {
         this.image = image;
     }
 
-    public String[] getSong_ids() {
+    public List<String> getSong_ids() {
         return song_ids;
     }
 
-    public void setSong_ids(String[] song_ids) {
+    public void setSong_ids(List<String> song_ids) {
         this.song_ids = song_ids;
     }
 }

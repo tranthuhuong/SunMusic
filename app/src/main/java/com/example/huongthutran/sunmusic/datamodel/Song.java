@@ -18,10 +18,15 @@ public class Song {
     private String singgerName;
     private String singgerImage;
     private int countReviews;
+    private int amount_view;
     private float scoreReviews;
     private int countReview;
+    private int countAddPlayList;
     public Song(){
-
+        this.countReview=0;
+        this.countAddPlayList=0;
+        this.scoreReviews=0;
+        this.amount_view=0;
     }
     public Song(String id, String name, String link, String image, String timeCreate, int authorId, String authorName, String singgerImage, int countReviews, float scoreReviews,int singgerId,String singgerName,int countReview) {
         this.song_id = id;
@@ -37,6 +42,23 @@ public class Song {
         this.countReviews = countReviews;
         this.scoreReviews = scoreReviews;
         this.countReview=countReview;
+
+    }
+
+    public int getAmount_view() {
+        return amount_view;
+    }
+
+    public void setAmount_view(int amount_view) {
+        this.amount_view = amount_view;
+    }
+
+    public int getCountAddPlayList() {
+        return countAddPlayList;
+    }
+
+    public void setCountAddPlayList(int countAddPlayList) {
+        this.countAddPlayList = countAddPlayList;
     }
 
     public int getCountReview() {

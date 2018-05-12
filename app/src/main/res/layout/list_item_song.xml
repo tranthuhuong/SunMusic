@@ -2,34 +2,82 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/background_color"
     android:padding="10dp"
     >
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/song"
+        android:background="#181818"
         android:id="@+id/imgSong"
         />
     <LinearLayout
         android:layout_width="200dp"
         android:padding="5dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         >
         <TextView
+            android:textColor="@color/text_color_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="17dp"
+            android:textSize="15dp"
             android:id="@+id/tvNameSong"
             android:text="Bài hát"
             />
         <TextView
             android:layout_width="wrap_content"
+            android:textColor="@color/colorPrimary"
             android:layout_height="wrap_content"
             android:id="@+id/tvNameSingger"
+            android:textStyle="bold"
+            android:textSize="12dp"
             android:text="Nghệ sĩ:"
             />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="15dp">
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:src="@drawable/play_icon_smal"
+                />
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:text="(225k)"
+                android:textColor="@color/text_color_white"
+                android:id="@+id/tvcountPlay"
+                android:textSize="8dp"
+                />
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:src="@drawable/star"
+                />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:text="(92)"
+                android:textColor="@color/text_color_white"
+                android:textSize="8dp"
+                android:id="@+id/tvcountStart"
+                />
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:src="@drawable/add_yellow"
+                />
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:text="(8)"
+                android:id="@+id/tvcountAddPlaylist"
+                android:textColor="@color/text_color_white"
+                android:textSize="8dp"
+                />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

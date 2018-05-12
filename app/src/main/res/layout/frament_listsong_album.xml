@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <FrameLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:background="#181818"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:scaleType="centerCrop"
+        android:id="@+id/imgSong_bg"
+        android:src="@drawable/bg1"
+        android:layout_height="match_parent" />
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_marginTop="40dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/im"
+                android:id="@+id/imgf_album"
+                />
+            <TextView
+                android:gravity="center"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvfAlbumName"
+                android:text="HÔM NAY NGHE GÌ GIGI"
+                android:textColor="@color/text_color_white"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                />
+            <TextView
+                android:gravity="center"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvfAmountSong"
+                android:text="10 bài hát"
+                android:textColor="@color/text_color_white"
+                android:textStyle="bold"
+                android:paddingBottom="50dp"
+                android:textSize="15dp"
+                />
+            <android.support.v7.widget.RecyclerView
+                android:background="@color/background_color"
+                android:paddingTop="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/recyclerViewSongInAlBum"
+                >
+
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+        <android.support.v7.widget.AppCompatButton
+            android:layout_width="100dp"
+            android:textColor="@color/text_color_white"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_gradius"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="265dp"
+            android:textAlignment="center"
+            android:id="@+id/btnplayall"
+            android:text="Nghe"
+            />
+
+    </FrameLayout>
+
+</android.support.v4.widget.NestedScrollView>

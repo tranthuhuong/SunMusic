@@ -6,5 +6,13 @@ package com.example.huongthutran.sunmusic.NetWork;
 
 public enum ApiType {
     GET_SONG,
-    GET_USER
+    GET_SONG_TOP,
+    GET_USER,
+    GET_PLAYLIST,
+    GET_PLAYLIST_TOP,
+    GET_CATEGORY,
+    POST_USER,
+    PUT_USER,
+    POST_PLAYLIST
+
 }

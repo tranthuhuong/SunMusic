@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    tools:context=".MainActivity">
+   <LinearLayout
+       android:padding="8dp"
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+       <LinearLayout
+           android:orientation="vertical"
+           android:layout_marginTop="20dp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+           <TextView
+               android:textAppearance="@style/TextAppearance.AppCompat.Title"
+               android:text="TẬN HƯỞNG CUÔI TUẦN"
+               android:gravity="center"
+               android:textColor="@color/text_color_white"
+               android:layout_marginBottom="16dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+
+               android:layout_marginLeft="8dp" />
+           <TextView
+               android:text="Thưởng thức ca khúc phù hợp hôm nay"
+               android:layout_marginBottom="8dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:gravity="center"
+               android:textColor="@color/text_color_white"
+               android:layout_marginLeft="8dp" />
+           <android.support.v7.widget.RecyclerView
+               android:background="@color/background_color"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/recycler_playList"
+               >
+           </android.support.v7.widget.RecyclerView>
+           <TextView
+               android:text="Xem thêm"
+               android:layout_marginBottom="20dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:padding="10dp"
+               android:gravity="center"
+               android:textColor="@color/colorPrimary"
+               android:layout_marginLeft="10dp" />
+       </LinearLayout>
+       <LinearLayout
+           android:orientation="vertical"
+           android:layout_marginTop="20dp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+           <TextView
+               android:textAppearance="@style/TextAppearance.AppCompat.Title"
+               android:text="CHỦ ĐỀ VÀ THỂ LOẠI"
+               android:textColor="@color/text_color_white"
+               android:layout_marginBottom="16dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="8dp" />
+           <android.support.v7.widget.RecyclerView
+               android:background="@color/background_color"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/recycler_category"
+               >
+           </android.support.v7.widget.RecyclerView>
+           <TextView
+               android:text="Xem thêm"
+               android:layout_marginBottom="20dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:padding="10dp"
+               android:gravity="center"
+               android:textColor="@color/colorPrimary"
+               android:layout_marginLeft="10dp" />
+       </LinearLayout>
+       <LinearLayout
+           android:paddingEnd="16dp"
+           android:paddingStart="16dp"
+           android:orientation="vertical"
+           android:layout_marginTop="16dp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+           <TextView
+               android:textAppearance="@style/TextAppearance.AppCompat.Title"
+               android:text="CÓ THỂ BẠN THÍCH"
+               android:textColor="@color/text_color_white"
+               android:layout_marginBottom="16dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"/>
+           <android.support.v7.widget.RecyclerView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/listviewSongs"
+               android:background="@color/background_color"
+               >
+           </android.support.v7.widget.RecyclerView>
+           <TextView
+               android:text="Xem thêm"
+               android:layout_marginBottom="20dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:padding="10dp"
+               android:gravity="center"
+               android:textColor="@color/colorPrimary"
+               android:layout_marginLeft="10dp" />
+       </LinearLayout>
+
+   </LinearLayout>
+
+
+</android.support.v4.widget.NestedScrollView>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/bg_list"
+    android:background="@drawable/topic_cover"
+    android:layout_marginTop="3dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp">
+    <ImageView
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:background="#181818"
+        android:id="@+id/imageListPlay"
+
+        />
+    <TextView
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:textStyle="bold"
+        android:textColor="@color/text_color_white"
+        android:text="Cà phê cùng bạn bè"
+        android:id="@+id/tvNamePlayList"
+        />
+</LinearLayout>

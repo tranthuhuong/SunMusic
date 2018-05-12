@@ -7,4 +7,11 @@ package com.example.huongthutran.sunmusic.NetWork;
 public class HttpParam {
     public String param;
     public String value;
+    public HttpParam(){
+
+    }
+    public HttpParam(String param, String value) {
+        this.param = param;
+        this.value = value;
+    }
 }

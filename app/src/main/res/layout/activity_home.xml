@@ -4,46 +4,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
+    android:background="#000"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <FrameLayout
-        android:id="@+id/view_pager_home"
+        android:id="@+id/fragmentlayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" ></FrameLayout>
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="0dp"
-        android:layout_marginStart="0dp"
-        android:background="?android:attr/windowBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/navigation" />
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/playMusic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <LinearLayout
         android:id="@+id/playMusic"
-        android:visibility="gone"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginBottom="56dp"
-        android:background="?android:attr/windowBackground"
+        android:paddingTop="5dp"
+        android:background="@drawable/bg_divplay"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:orientation="horizontal">
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:id="@+id/imgSongPlaying"
-            android:src="@drawable/song"
-            android:layout_weight="1"
-            />
         <LinearLayout
             android:layout_weight="4"
             android:orientation="vertical"
+            android:paddingLeft="30dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
             <TextView
@@ -51,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="hihihi"
-                android:textColor="#000"
+                android:textColor="@color/text_color_white"
                 android:textSize="15dp"
                 android:id="@+id/tvNameSongPlaying"
                 />
@@ -59,20 +48,46 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="hihihi"
+                android:textColor="@color/colorPrimary"
                 android:id="@+id/tvNameSinggerPlaying"
                 />
         </LinearLayout>
 
         <ImageView
             android:layout_gravity="center_vertical"
+            android:padding="5dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/imgPre"
+            android:src="@drawable/previous_white" />
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:padding="5dp"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:id="@+id/imgIconPlay"
-            android:src="@drawable/play" />
-        <SeekBar
+            android:src="@drawable/play_white" />
+        <ImageView
             android:layout_gravity="center_vertical"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/seekBarProgress"/>
+            android:padding="5dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/imgNext"
+            android:src="@drawable/next_white" />
     </LinearLayout>
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="0dp"
+        app:itemIconTint="#E8e8e8"
+        android:layout_marginStart="0dp"
+        android:background="@drawable/line_tab"
+        app:itemTextColor="#E8e8e8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/navigation" />
+
+
 </android.support.constraint.ConstraintLayout>
