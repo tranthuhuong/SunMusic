@@ -47,6 +47,7 @@ public class PlayListViewHolder extends RecyclerView.ViewHolder {
                 android.support.v4.app.FragmentManager fragmentManager = ((MainActivity) context).getSupportFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragmentlayout, fragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                 fragmentTransaction.commit();
             }

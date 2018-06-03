@@ -16,19 +16,22 @@ import java.util.List;
 public class SongsAlbumAdapter extends RecyclerView.Adapter<SongAlbumViewHolder>{
     List<Song> songs;
     Context context;
+    Boolean flag=true; // true là album của user, false là ko phải
+    String playlist_id;
     private LayoutInflater inflater;
-    public SongsAlbumAdapter(Context context, List<Song> l){
+    public SongsAlbumAdapter(Context context, List<Song> l,boolean flag,String playlist_id){
         inflater = LayoutInflater.from(context);
         this.songs = l;
         this.context = context;
+        this.flag=flag;
+        this.playlist_id=playlist_id;
 
     }
     @Override
     public SongAlbumViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         inflater=LayoutInflater.from(parent.getContext());
         View itemview=inflater.inflate(R.layout.item_song_album,parent,false);
-
-        return new SongAlbumViewHolder(itemview,context);
+        return new SongAlbumViewHolder(itemview,context,flag,playlist_id);
     }
 
     @Override

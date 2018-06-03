@@ -5,55 +5,45 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.huongthutran.sunmusic.Adapter.PlaylistAdapter;
+import com.example.huongthutran.sunmusic.Adapter.SongsAdapter;
 import com.example.huongthutran.sunmusic.Adapter.SongsAlbumAdapter;
 import com.example.huongthutran.sunmusic.MainActivity;
 import com.example.huongthutran.sunmusic.Model.PlayListViewHolder;
-import com.example.huongthutran.sunmusic.Model.SongAlbumViewHolder;
 import com.example.huongthutran.sunmusic.Model.State;
 import com.example.huongthutran.sunmusic.NetWork.DownloadImageTask;
 import com.example.huongthutran.sunmusic.R;
 import com.example.huongthutran.sunmusic.Util.PlayerHelper;
 import com.example.huongthutran.sunmusic.datamodel.PlayListSong;
 
-import java.util.List;
-
-public class FragmentAlbumDetail extends android.support.v4.app.Fragment {
+public class FragmentPlaylistLove extends android.support.v4.app.Fragment {
     View rootView;
     public static transient PlayListSong album=new PlayListSong();
 
     RecyclerView recyclerView;
-    ImageView imgf_album;
-    TextView tvfAlbumName,tvfAmountSong;
-    AppCompatButton btnPlayAll;
-    private SongsAlbumAdapter playlistAdapter;
+    Button btnPlayAll;
+    private SongsAdapter playlistAdapter;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView= inflater.inflate(R.layout.frament_listsong_album, container, false);
-        tvfAmountSong=rootView.findViewById(R.id.tvfAmountSong);
-        imgf_album=rootView.findViewById(R.id.imgf_album);
-        tvfAlbumName=rootView.findViewById(R.id.tvfAlbumName);
-        //lấy album bên playlstView Holder
-        album= PlayListViewHolder.p;
-        tvfAlbumName.setText(album.getName_playlist());
-        tvfAmountSong.setText(album.getSongs().size() + " bài hát");
-        new DownloadImageTask(imgf_album)
-                .execute(album.getImage());
+        rootView= inflater.inflate(R.layout.fragment_listlove, container, false);
+
+        //lấy album
+        album= MainActivity.love;
+
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView=rootView.findViewById(R.id.recyclerViewSongInAlBum);
+        recyclerView=rootView.findViewById(R.id.listSongLove);
         recyclerView.setLayoutManager(llm);
-        playlistAdapter=new SongsAlbumAdapter(getContext(),album.getSongs(),MainActivity.user.getUid().equals(album.getUid()),album.getPlaylist_id()+"");
+        playlistAdapter=new SongsAdapter(getContext(),album.getSongs());
         recyclerView.setAdapter(playlistAdapter);
-        btnPlayAll=rootView.findViewById(R.id.btnplayall);
+        btnPlayAll=rootView.findViewById(R.id.btnPlayAll);
         //khi nhấn nge tất cả
         btnPlayAll.setOnClickListener(new View.OnClickListener() {
             @Override

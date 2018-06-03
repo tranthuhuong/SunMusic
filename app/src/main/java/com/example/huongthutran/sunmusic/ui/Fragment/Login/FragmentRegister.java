@@ -62,7 +62,7 @@ public class FragmentRegister extends android.support.v4.app.Fragment implements
                 String rePass=edtPass.getText().toString().trim();
                 String name=edtName.getText().toString().trim();
                 if(email.equals("")||userName.equals("")||pass.equals("")||rePass.equals("")){
-                    Toast.makeText(getContext(),"Bạn CHưa nhập đủ thông tin",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"Bạn Chưa nhập đủ thông tin",Toast.LENGTH_LONG).show();
                 } else if(!rePass.equals(pass)){
                     Toast.makeText(getContext(),"2 mật khẩu không khớp",Toast.LENGTH_LONG).show();
                 } else {
@@ -93,7 +93,6 @@ public class FragmentRegister extends android.support.v4.app.Fragment implements
     }
     @Override
     public void Callback(ApiType apiType, String json) {
-        Log.d("erorr json",json);
         if (apiType == ApiType.POST_USER) {
             try {
                 JSONObject jsonObject =new JSONObject(json);
@@ -108,6 +107,7 @@ public class FragmentRegister extends android.support.v4.app.Fragment implements
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                Toast.makeText(getContext(),"Đăng ký thành công",Toast.LENGTH_LONG).show();
                 CallApi.getInstance().CallapiServer(ApiType.POST_PLAYLIST, null, jsonListLove);
                 setFragment(FragmentLogin.newInstance());
 
@@ -123,39 +123,6 @@ public class FragmentRegister extends android.support.v4.app.Fragment implements
         android.support.v4.app.FragmentTransaction transaction = ((LoginActivity) getContext()).getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.idFragmentLogin, fragment);
         transaction.commit();
-    }
-    void createListLove(String id){
-        JSONObject json = new JSONObject();
-        try {
-            json.put("uid", id);
-            json.put("playlist_id", randomNumber());
-            json.put("name_playlist", "love list");
-            json.put("style", 1);
-            json.put("image", "");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        new Post(new CallBack<String>() {
-
-            @Override
-            public void onSuccess(String result) {
-                try {
-
-                    JSONObject object = new JSONObject(result);
-                    if(object.getInt("playlist_id") !=0){
-
-                        setFragment(FragmentLogin.newInstance());
-                }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFail(String result) {
-
-            }
-        }, json).execute("api/playlist");
     }
     public int randomNumber() {
         Random random = new Random();

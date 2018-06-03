@@ -64,6 +64,58 @@
                     android:layout_weight="0.2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"></LinearLayout>
+                   <LinearLayout
+                       android:layout_width="wrap_content"
+                       android:layout_weight="1"
+                       android:gravity="center"
+                       android:layout_height="wrap_content">
+                       <ImageView
+                           android:id="@+id/btnAddToListLove"
+                           android:layout_width="30dp"
+                           android:layout_height="30dp"
+                           android:src="@drawable/like_gray"
+                           />
+                   </LinearLayout>
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/btnAddPlaylist"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/addplaylist"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/btnRating"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/commenting"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"></LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:gravity="bottom"
+                    android:layout_weight="0.2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 <SeekBar
                     android:id="@+id/seekBarPlayer"
                     android:layout_width="match_parent"
@@ -87,6 +139,7 @@
                         android:padding="8dp"/>
 
                     <ImageView
+
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
                         android:layout_weight="1"

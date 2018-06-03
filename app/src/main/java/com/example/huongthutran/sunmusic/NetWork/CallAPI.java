@@ -27,10 +27,12 @@ public class CallApi {// Gọi Request lên Server
     public CallBackData callBackData;
     public static CallApi callApi;
     private String u="";
-    private static String urlSongs = Constant.baseURLFPT + "api/song";
-    private static String urlPlayList = Constant.baseURLFPT +"api/PlayList";
-    private static String urlCategory = Constant.baseURLFPT +"api/Category";
-    private static String urlUser = Constant.baseURLFPT +"api/User";
+    private static String urlSongs = Constant.baseURL + "api/song";
+    private static String urlPlayList = Constant.baseURL +"api/PlayList";
+    private static String urlCategory = Constant.baseURL +"api/Category";
+    private static String urlSongList = Constant.baseURL +"api/SongList";
+        private static String urlRating = Constant.baseURL +"api/Rating";
+    private static String urlUser = Constant.baseURL +"api/User";
     public static CallApi getInstance() {
         if (callApi == null) {
             callApi = new CallApi();
@@ -75,6 +77,30 @@ public class CallApi {// Gọi Request lên Server
                 method_all = method.methodSplit("POST_USER");
                 break;
 
+            case POST_SONGLIST:
+                urlServer=urlSongList;
+                method_all=method.methodSplit("POST_SONGLIST");
+                break;
+            case GET_RATING:
+                urlServer=urlRating;
+                method_all=method.methodSplit("GET_RATING");
+                break;
+            case POST_RATING:
+                urlServer=urlRating;
+                method_all=method.methodSplit("POST_RATING");
+                break;
+            case DELETE_SONGLIST:
+                urlServer=urlSongList+"/"+u;
+                method_all=method.methodSplit("DELETE_SONGLIST");
+                break;
+            case PUT_RATING:
+                urlServer=urlRating+"/"+u;
+                method_all=method.methodSplit("PUT_RATING");
+                break;
+            case DELETE_PLAYLIST:
+                urlServer=urlPlayList+"/"+u;
+                method_all=method.methodSplit("DELETE_PLAYLIST");
+                break;
         }
         // tạo data nằm trên url gọi lên server
         if (dataHeader != null) {

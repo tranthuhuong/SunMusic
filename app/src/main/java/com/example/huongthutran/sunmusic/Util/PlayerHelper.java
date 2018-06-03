@@ -26,7 +26,7 @@ public class PlayerHelper {
     private String state;
     private Song currentSong;
     Context context;
-
+    int positionSong;
     public static PlayerHelper getInstance() {
         if (instanse == null) {
 
@@ -40,6 +40,7 @@ public class PlayerHelper {
         songList = new ArrayList<>();
         state = State.STOP;
         currentSong = null;
+        positionSong=-1;
     }
 
     public void play(final Song song){
@@ -49,7 +50,8 @@ public class PlayerHelper {
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         addSong(song);
         currentSong = song;
-
+        positionSong=songList.indexOf(currentSong);
+        //positionSong=0;
         @SuppressLint("StaticFieldLeak") AsyncTask<String, String, String> task = new AsyncTask<String, String, String>() {
             @Override
             protected String doInBackground(String... strings) {
@@ -71,6 +73,7 @@ public class PlayerHelper {
                     mediaPlayer.release();
                     state = State.STOP;
                     currentSong = null;
+                    positionSong=-1;
 
                 }
                 catch (Exception e) {
@@ -85,8 +88,10 @@ public class PlayerHelper {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-                state = State.PLAY;
                 mediaPlayer.start();
+                state = State.PLAY;
+                PlayActivity.initSeekBar();
+
 
 
             }
@@ -120,8 +125,22 @@ public class PlayerHelper {
         mediaPlayer.stop();
         state = State.STOP;
         currentSong = null;
+        positionSong=-1;
     }
+    public void onPre(){
+        int position = songList.indexOf(currentSong);
+        if (position - 1 >= 0) {
+            currentSong = songList.get(position - 1);
+            play(currentSong);
+        } else {
+            currentSong = songList.get(0);
+            play(currentSong);
+        }
+//        PlayActivity.showCurrentSong();
+        MainActivity.tvNameSongPlaying.setText(currentSong.getSong_name());
+        MainActivity.tvNameSinggerPlaying.setText(currentSong.getSinggerName());
 
+    }
     public void onNext(){
         int position = songList.indexOf(currentSong);
         if (position + 1 < songList.size()) {
@@ -151,6 +170,11 @@ public class PlayerHelper {
         }
         return true;
     }
+    public void seekToTime(int time) {
+        mediaPlayer.seekTo(time);
+        mediaPlayer.start();
+    }
+
     public boolean addSong(Song song) {
         //nếu chưa tồn tại thì add
         if (!songList.contains(song)) {
@@ -158,6 +182,15 @@ public class PlayerHelper {
             return true;
         } return false;
     }
+
+    public int getPositionSong() {
+        return positionSong;
+    }
+
+    public void setPositionSong(int positionSong) {
+        this.positionSong = positionSong;
+    }
+
     public String getState() {
         return state;
     }

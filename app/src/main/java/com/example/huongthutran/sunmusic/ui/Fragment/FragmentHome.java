@@ -8,11 +8,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.huongthutran.sunmusic.Adapter.CategoryAdapter;
 import com.example.huongthutran.sunmusic.Adapter.PlaylistAdapter;
 import com.example.huongthutran.sunmusic.Adapter.SongsAdapter;
+import com.example.huongthutran.sunmusic.LoginActivity;
 import com.example.huongthutran.sunmusic.MainActivity;
 import com.example.huongthutran.sunmusic.NetWork.ApiType;
 import com.example.huongthutran.sunmusic.NetWork.CallApi;
@@ -23,6 +25,7 @@ import com.example.huongthutran.sunmusic.Util.Constant;
 import com.example.huongthutran.sunmusic.datamodel.CategorySong;
 import com.example.huongthutran.sunmusic.datamodel.PlayListSong;
 import com.example.huongthutran.sunmusic.datamodel.Song;
+import com.example.huongthutran.sunmusic.ui.Fragment.Song.FragmentMoreSong;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,12 +39,14 @@ public class FragmentHome extends android.support.v4.app.Fragment implements Cal
     int TOP_LISTPLAY=3;
     int TOP_MUSIC=6;
     private View rootView;
+    private TextView tvMoreSong;
     private List<HttpParam> ls=new ArrayList<>();
     private List<PlayListSong> playListSongs=new LinkedList<>();
     private List<CategorySong> categorySongs=new LinkedList<>();
     private PlaylistAdapter playlistAdapter;
     private SongsAdapter songsAdapter;
     private RecyclerView recyclerView,listViewSong,recyclerCategory;
+
     CategoryAdapter categoryAdapter;
     List<Song> songs=new ArrayList<>();
 
@@ -53,6 +58,7 @@ public class FragmentHome extends android.support.v4.app.Fragment implements Cal
         rootView= inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView=rootView.findViewById(R.id.recycler_playList);
         recyclerView.setHasFixedSize(true);
+        tvMoreSong=rootView.findViewById(R.id.tvMoreSong);
         CallApi.getInstance().SetcallBack(this);
         CallApi.getInstance().CallapiServer(ApiType.GET_PLAYLIST_TOP, null, null);
         listViewSong=rootView.findViewById(R.id.listviewSongs);
@@ -75,7 +81,20 @@ public class FragmentHome extends android.support.v4.app.Fragment implements Cal
 
         CallApi.getInstance().SetcallBack(this);
         CallApi.getInstance().CallapiServer(ApiType.GET_CATEGORY, null, null);
+
+        tvMoreSong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFragment(new FragmentMoreSong());
+            }
+        });
         return rootView;
+    }
+    public void setFragment(android.support.v4.app.Fragment fragment) {
+        android.support.v4.app.FragmentTransaction transaction = ((MainActivity) getContext()).getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragmentlayout, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
     public static FragmentHome newInstance() {
         if(kt == null){
@@ -124,7 +143,7 @@ public class FragmentHome extends android.support.v4.app.Fragment implements Cal
             }
         }
     }
-    public List<Song> parseSong(String json) throws JSONException {
+    public static List<Song> parseSong(String json) throws JSONException {
         List<Song> songgs = new LinkedList<>();
         JSONArray listJSON = new JSONArray(json);
         JSONObject jsonObject;
@@ -165,7 +184,7 @@ public class FragmentHome extends android.support.v4.app.Fragment implements Cal
             playListSong.setImage(jsonObject.getString("image"));
             playListSong.setPlaylist_id(jsonObject.getInt("playlist_id"));
             playListSong.setName_playlist(jsonObject.getString("name_playlist"));
-
+            playListSong.setUid(jsonObject.getString("uid"));
             JSONArray songsJson = jsonObject.getJSONArray("songs");
             List<Song> songs = new ArrayList<>();
             for(int j=0;j<songsJson.length();j++){

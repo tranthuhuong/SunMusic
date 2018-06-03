@@ -107,15 +107,21 @@
            </android.support.v7.widget.RecyclerView>
            <TextView
                android:text="Xem thêm"
-               android:layout_marginBottom="20dp"
+               android:paddingBottom="70dp"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
+
                android:padding="10dp"
                android:gravity="center"
+               android:id="@+id/tvMoreSong"
                android:textColor="@color/colorPrimary"
                android:layout_marginLeft="10dp" />
        </LinearLayout>
+       <LinearLayout
+           android:layout_width="wrap_content"
+           android:layout_height="60dp">
 
+       </LinearLayout>
    </LinearLayout>
 
 

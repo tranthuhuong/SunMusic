@@ -25,7 +25,7 @@ public class Post extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... strings) {
-        String urlString = Constant.baseURLFPT + strings[0];
+        String urlString = Constant.baseURL + strings[0];
         URL url = null;
         HttpURLConnection httpURLConnection = null;
         InputStream inputStream = null;

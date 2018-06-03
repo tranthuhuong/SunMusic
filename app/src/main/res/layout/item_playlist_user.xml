@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background_color"
+    android:padding="10dp"
+    >
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/imgPlaylist"
+        android:background="#181818"
+        android:gravity="center"
+        />
+    <LinearLayout
+        android:layout_width="200dp"
+        android:padding="5dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:textColor="@color/text_color_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:id="@+id/tvNamePlaylist_item"
+            android:text="Bài hát"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvAmountSong_item"
+            android:textStyle="bold"
+            android:textSize="12dp"
+            android:text="Số lượng"
+            />
+    </LinearLayout>
+
+</LinearLayout>

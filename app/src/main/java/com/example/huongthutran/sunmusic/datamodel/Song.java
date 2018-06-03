@@ -1,6 +1,8 @@
 package com.example.huongthutran.sunmusic.datamodel;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Huong Thu Tran on 4/26/2018.
@@ -22,16 +24,19 @@ public class Song {
     private float scoreReviews;
     private int countReview;
     private int countAddPlayList;
+    private List<Rating> ratings;
     public Song(){
         this.countReview=0;
         this.countAddPlayList=0;
         this.scoreReviews=0;
         this.amount_view=0;
+        this.ratings=new ArrayList<>();
     }
-    public Song(String id, String name, String link, String image, String timeCreate, int authorId, String authorName, String singgerImage, int countReviews, float scoreReviews,int singgerId,String singgerName,int countReview) {
+    public Song(String id, String name, String link, String image, String timeCreate, int authorId, String authorName, String singgerImage, int countReviews, float scoreReviews,int singgerId,String singgerName,int countReview,List<Rating> r) {
         this.song_id = id;
         this.song_name = name;
         this.link = link;
+        this.ratings=r;
         this.image = image;
         this.timeCreate = timeCreate ;
         this.authorId = authorId;
@@ -43,6 +48,14 @@ public class Song {
         this.scoreReviews = scoreReviews;
         this.countReview=countReview;
 
+    }
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
     }
 
     public int getAmount_view() {

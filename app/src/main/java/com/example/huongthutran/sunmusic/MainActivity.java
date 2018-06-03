@@ -1,5 +1,8 @@
 package com.example.huongthutran.sunmusic;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -44,9 +47,9 @@ public class MainActivity extends AppCompatActivity implements CallBackData{
     public static SeekBar seekBar;
     public static LinearLayout lnplayMusic;
     public String id;
-    public PlayListSong love=new PlayListSong();//Danh sách yêu thích
-    public List<PlayListSong> playListSongs=new ArrayList<>();
-
+    public static PlayListSong love=new PlayListSong();//Danh sách yêu thích
+    public static List<PlayListSong> playListSongs=new ArrayList<>();
+    public static int item_now=0;
     public static User user=new User();
 
     private BottomNavigationView navigation;
@@ -61,13 +64,13 @@ public class MainActivity extends AppCompatActivity implements CallBackData{
                   setFragment(FragmentHome.newInstance());
                     return true;
                 case R.id.navigation_dashboard:
-                    setFragment(FragmentUser.newInstance());
+
                     return true;
                 case R.id.navigation_notifications:
 
                     return true;
                 case R.id.navigation_search:
-
+                    setFragment(FragmentUser.newInstance());
                     return true;
             }
             return false;
@@ -105,7 +108,23 @@ public class MainActivity extends AppCompatActivity implements CallBackData{
         l.add(new HttpParam("userid",id));
         CallApi.getInstance().CallapiServer(ApiType.GET_PLAYLIST, l, null);
         Toast.makeText(MainActivity.this,"hello "+id,Toast.LENGTH_LONG).show();
-
+        lnplayMusic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, PlayActivity.class);
+                context.startActivity(intent);
+            }
+        });
+        imgPre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(PlayerHelper.getInstance().getPositionSong() <= 0){
+                    Toast.makeText(getApplicationContext(), "Không có bài phía trước", Toast.LENGTH_SHORT).show();
+                }else {
+                    PlayerHelper.getInstance().onPre();
+                }
+            }
+        });
         imgNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,28 +138,40 @@ public class MainActivity extends AppCompatActivity implements CallBackData{
     };
     public void setFragment(android.support.v4.app.Fragment fragment) {
         android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
         transaction.replace(R.id.fragmentlayout, fragment);
+        transaction.addToBackStack(null);
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         transaction.commit();
     }
-
+    @Override
+    public void onBackPressed(){
+        FragmentManager fm = getFragmentManager();
+        if (fm.getBackStackEntryCount() > 0) {
+            Log.i("MainActivity", "popping backstack");
+            fm.popBackStack();
+        } else {
+            Log.i("MainActivity", "nothing on backstack, calling super");
+           // super.onBackPressed();
+        }
+    }
 
     @Override
     public void Callback(ApiType apiType, String json) {
         if (apiType == ApiType.GET_USER) {
             try {
                 user = parseUser(json);
-                setFragment(FragmentHome.newInstance());
             } catch (JSONException e) {
                 e.printStackTrace();
-                Log.d("test callback 1",e.toString());
             }
         }
         if (apiType == ApiType.GET_PLAYLIST) {
             try {
-                parseListUser(json);
+                playListSongs=parseListUser(json);
+                setFragment(FragmentHome.newInstance());
+
             } catch (JSONException e) {
                 e.printStackTrace();
-                Log.d("test callback 1",e.toString());
             }
         }
     }
@@ -156,8 +187,8 @@ public class MainActivity extends AppCompatActivity implements CallBackData{
 
         return user;
     }
-    public void parseListUser(String json) throws JSONException {
-        playListSongs.clear();
+    public static List<PlayListSong> parseListUser(String json) throws JSONException {
+        List<PlayListSong>p=new ArrayList<>();
         JSONArray listJSON = new JSONArray(json);
         JSONObject jsonObject;
         for (int i=0;i<listJSON.length();i++){
@@ -166,10 +197,11 @@ public class MainActivity extends AppCompatActivity implements CallBackData{
             playListSong.setImage(jsonObject.getString("image"));
             playListSong.setPlaylist_id(jsonObject.getInt("playlist_id"));
             playListSong.setName_playlist(jsonObject.getString("name_playlist"));
+            playListSong.setUid(jsonObject.getString("uid"));
             JSONArray songsJson = jsonObject.getJSONArray("songs");
             List<Song> songs = new ArrayList<>();
             for(int j=0;j<songsJson.length();j++){
-                Log.d("test","song"+j);
+
                 JSONObject temp = songsJson.getJSONObject(j);
                 Song song=new Song();
                 song.setSong_id(temp.getString("song_id"));
@@ -183,10 +215,44 @@ public class MainActivity extends AppCompatActivity implements CallBackData{
                 songs.add(song);
             }
             playListSong.setSongs(songs);
-            if(jsonObject.getInt("playlist_id")==0){
-                playListSongs.add(playListSong);
+            int style=jsonObject.getInt("style");
+            if(style==0){
+                p.add(playListSong);
             } else love=playListSong;
-
         }
+        return p;
+    }
+    public static PlayListSong parseListLove(String json) throws JSONException {
+        PlayListSong p= new PlayListSong();
+
+        JSONArray listJSON = new JSONArray(json);
+        JSONObject jsonObject;
+        for (int i=0;i<listJSON.length();i++){
+            jsonObject=listJSON.getJSONObject(i);
+            PlayListSong playListSong=new PlayListSong();
+            playListSong.setImage(jsonObject.getString("image"));
+            playListSong.setPlaylist_id(jsonObject.getInt("playlist_id"));
+            playListSong.setName_playlist(jsonObject.getString("name_playlist"));
+            playListSong.setUid(jsonObject.getString("uid"));
+            JSONArray songsJson = jsonObject.getJSONArray("songs");
+            List<Song> songs = new ArrayList<>();
+            for(int j=0;j<songsJson.length();j++){
+
+                JSONObject temp = songsJson.getJSONObject(j);
+                Song song=new Song();
+                song.setSong_id(temp.getString("song_id"));
+                song.setSong_name(temp.getString("song_name"));
+                song.setLink(temp.getString("link"));
+                song.setImage(temp.getString("image"));
+                song.setTimeCreate(temp.getString("timeCreate"));
+                song.setSinggerId(temp.getInt("singgerID"));
+                song.setSinggerName(temp.getString("singgerName"));
+                song.setSinggerImage(temp.getString("singgerImage"));
+                songs.add(song);
+            }
+            playListSong.setSongs(songs);
+            p=playListSong;
+        }
+        return p;
     }
 }
